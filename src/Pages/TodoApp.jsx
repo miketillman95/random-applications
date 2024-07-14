@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import '../Css/Todo.css'
 import Todo from '../components/Todo'
 
-function TodoApp() {
+function TodoApp({tasks}) {
+    const taskList = tasks?.map((task) => <Todo id={task.id} name ={task.name}  completed = {task.completed} key={task.id} />);
     return (
         <div className="todoapp stack-large">
             <Link to='/'> Home </Link>
@@ -47,9 +48,7 @@ function TodoApp() {
             role="list"
             className="todo-list stack-large stack-exception"
             aria-labelledby="list-heading">
-                <Todo name ='Eat' id = 'todo-0' completed/>
-                <Todo name ='Sleep' id = 'todo-1'/>
-                <Todo name ='Repeat' id = 'todo-2'/>
+                {taskList}
             </ul>
         </div>
     );
