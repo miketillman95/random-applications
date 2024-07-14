@@ -4,7 +4,6 @@ import HomePage from './HomePage'
 import TodoApp from './Pages/TodoApp'
 
 function App() {
-
   return (
     <Router>
     <Routes>
