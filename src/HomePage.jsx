@@ -4,20 +4,30 @@ import { useState } from "react";
 
 
 const HomePage = () => {
-const [count, setCount] = useState(10)
-const [number, setNumber] = useState()
+const [count, setCount] = useState(0)
+
+const handleDecrement =() =>{
+    if(count <= 0) {
+        alert('Count cant go below 0')
+        setCount(0)
+
+    } else {
+        setCount(count -1)
+    }
+}
 
     return (
     <>
-        <h1>check out our products</h1>
+        <h1 className="todo-title"> check out out the todo app</h1>
         <div className="product-link">
-            <Link to='/productlist'> Product List</Link>
+            <Link to='/todoApp'> Todo app</Link>
         </div>
+        <br/>
         <div className="state-counter">
             <h1> Counter</h1>
             <p>{count}</p>
             <button onClick={() => setCount(count + 1)}> increase</button>
-            <button onClick={() => setCount(count -1)}> Decrease </button>
+            <button onClick={() => handleDecrement()}> Decrease </button>
             <button onClick={() => setCount(0)}> Reset</button>
         </div>
         <br/>

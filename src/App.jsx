@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import '../src/Css/App.css'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import HomePage from './HomePage'
-import ProductList from './Components/ProductList'
+import TodoApp from './Pages/TodoApp'
 
 function App() {
 
@@ -10,7 +9,7 @@ function App() {
     <Router>
     <Routes>
         <Route index element={<HomePage />} />
-        <Route path='productlist' element={<ProductList />} />
+        <Route path='todoApp' element={<TodoApp/>} />
     </Routes>
   </Router>
   
