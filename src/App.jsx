@@ -13,7 +13,7 @@ function App() {
     <Router>
     <Routes>
         <Route index element={<HomePage />} />
-        <Route path='todoApp' element={<TodoApp tasks= {DATA}/>} />
+        <Route path='todoApp' element={<TodoApp dataTasks= {DATA}/>} />
     </Routes>
   </Router>
   
