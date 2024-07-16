@@ -7,7 +7,7 @@ function Form({addTask}) {
 
 
 	const handleSubmit = (e) => {
-		if(!name.trim()){
+		if(name.trim() == ''){
 			alert('must enter a value')
 		} else{
 			e.preventDefault();
