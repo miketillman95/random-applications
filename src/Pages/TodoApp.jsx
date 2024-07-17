@@ -21,20 +21,28 @@ function TodoApp({dataTasks}) {
         setTasks(updatedTasks)
     }
 
-    const taskList = tasks?.map((task) => <Todo id={task.id} name ={task.name}  completed = {task.completed} key={task.id}  toggleTaskCompleted={toggleTaskCompleted} />);
-
-    
+    const deleteTask = (id) => {
+        const remainingTasks = tasks.filter((task) => id !== task.id)
+        console.log(id)
+        setTasks(remainingTasks)
+    }
     const addTask = (name) => {
        const newTask = { id: `todo-${nanoid()}`, name, completed: false};
        setTasks([...tasks, newTask]);
     }
 
+    const taskList = tasks?.map((task) => <Todo id={task.id} name ={task.name}  completed = {task.completed} key={task.id}  toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask} />);
+
+    
+
+
+
     const tasksNoun = taskList.length != 1 ? 'tasks' : 'task';
-    const headingText = `${taskList.length} tasks remaining`
+    const headingText = `${taskList.length} ${tasksNoun} remaining`
     return (
         <div className="todoapp stack-large">
             <Link to='/'> Home </Link>
-            <h1 hidden = {false} >Todo Magic</h1>
+            <h1 hidden={true} >Todo Magic</h1>
                 <Form addTask={addTask}/>
             <div className="filters btn-group stack-exception">
                 <FilterButton/>
