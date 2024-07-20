@@ -26,8 +26,8 @@ const handleDecrement =() =>{
         <div className="state-counter">
             <h1> Counter</h1>
             <p>{count}</p>
-            <button onClick={() => setCount(count + 1)}> increase</button>
-            <button onClick={() => handleDecrement()}> Decrease </button>
+            <button onClick={() => setCount(count + 1)}> increase</button><br/>
+            <button onClick={() => handleDecrement()}> Decrease </button><br/>
             <button onClick={() => setCount(0)}> Reset</button>
         </div>
         <br/>

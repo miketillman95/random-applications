@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../Css/Todo.css'
+import '../Css/TodoApp.css'
 import Todo from '../components/Todo'
 import Form from "../components/Form";
 import FilterButton from "../components/FilterButton";
@@ -10,6 +10,7 @@ import { nanoid } from 'nanoid'
 
 function TodoApp({dataTasks}) {
     const [tasks, setTasks] = useState(dataTasks)
+    const [filter, setFilter] = useState('All')
 
     function toggleTaskCompleted(id) {
         const updatedTasks = tasks.map((task)=> {
@@ -19,6 +20,7 @@ function TodoApp({dataTasks}) {
             return task
         })
         setTasks(updatedTasks)
+        console.log(updatedTasks)
     }
 
     const deleteTask = (id) => {
@@ -31,7 +33,32 @@ function TodoApp({dataTasks}) {
        setTasks([...tasks, newTask]);
     }
 
-    const taskList = tasks?.map((task) => <Todo id={task.id} name ={task.name}  completed = {task.completed} key={task.id}  toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask} />);
+    const editTask = (id, newName) => {
+        const editedTaskLiist = tasks.map((task) => {
+            if( id ===task.id) {
+                return {...task, name: newName};
+            }
+
+            return task
+        })
+        setTasks(editedTaskLiist)
+    }
+
+    const FILTER_MAP = {
+        All: () => true,
+        Active: (task) => !task.completed,
+        Completed: (task) => task.completed
+    }
+
+    const FILTER_NAMES = Object.keys(FILTER_MAP);
+
+
+
+
+    const taskList = tasks.filter(FILTER_MAP[filter]).map((task) => ( <Todo id={task.id} name ={task.name} editTask={editTask}  completed = {task.completed} key={task.id}  toggleTaskCompleted={toggleTaskCompleted} deleteTask={deleteTask} />));
+    console.log(filter)
+
+    const filterList = FILTER_NAMES.map((name) => <FilterButton key= {name} name = {name} isPresssed={name ===filter} setFilter={setFilter}/>)
 
     
 
@@ -45,9 +72,7 @@ function TodoApp({dataTasks}) {
             <h1 hidden={true} >Todo Magic</h1>
                 <Form addTask={addTask}/>
             <div className="filters btn-group stack-exception">
-                <FilterButton/>
-                <FilterButton/>
-                <FilterButton/>
+             {filterList}
             </div>
             <h2 id="list-heading">{headingText}</h2>
             <ul
